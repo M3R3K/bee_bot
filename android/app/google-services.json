@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507195488101",
+    "project_id": "bee-bot-a3d85",
+    "storage_bucket": "bee-bot-a3d85.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507195488101:android:08b4be83df1ab1b6e8538c",
+        "android_client_info": {
+          "package_name": "com.example.bee_bot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcrcPTYUTSGgalM0Efx3hE1taEt7ZctaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507195488101:android:bddab43d346b606be8538c",
+        "android_client_info": {
+          "package_name": "com.keremfive.bee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcrcPTYUTSGgalM0Efx3hE1taEt7ZctaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
