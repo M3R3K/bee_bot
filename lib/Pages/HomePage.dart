@@ -68,22 +68,26 @@ class _HomePageState extends State<HomePage> {
       if (e.code == 'wrong-password') {
         setState(() {
           message = "Incorrect password!";
+          _passwordController.clear();
           errorVisible = true;
         });
       } else if (e.code == 'user-not-found') {
         setState(() {
           message = "Incorrect e-mail!";
+          _passwordController.clear();
           errorVisible = true;
         });
       } else {
         setState(() {
           message = "Incorrect e-mail!";
+          _passwordController.clear();
           errorVisible = true;
         });
       }
     } catch (e) {
       setState(() {
         message = "Incorrect e-mail!";
+        _passwordController.clear();
         errorVisible = true;
       });
     }

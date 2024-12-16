@@ -1,3 +1,6 @@
+import 'package:bee_bot/widgets/button_neo.dart';
+import 'package:bee_bot/widgets/shadowy_container.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -67,6 +70,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.amber,
           shadowColor: Colors.black,
           title: FutureBuilder(
             future: fetchUsername(),
@@ -76,21 +80,55 @@ class _UserPageState extends State<UserPage> {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else if (snapshot.hasData) {
-                return Text('Hello ${snapshot.data}.');
+                // return Text('Hello ${snapshot.data}.');
+                return ShadowyContainer(
+                    text: "Hello ${snapshot.data}.",
+                    width: 250,
+                    bgcolor: const Color.fromARGB(255, 255, 255, 255));
               } else {
                 return const Text('No data');
               }
             },
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: signUserOut,
+            DottedBorder(
+              borderType: BorderType.Circle,
+              borderPadding: const EdgeInsets.all(7),
+              strokeWidth: 3,
+              child: IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: signUserOut,
+              ),
             ),
           ],
         ),
-        body: Column(
-          children: [],
+        backgroundColor: Colors.amber,
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2,
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      offset: Offset(4, 4),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.asset('images/question.png', fit: BoxFit.cover),
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }
