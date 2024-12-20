@@ -22,7 +22,7 @@ class _TestingPageState extends State<TestingPage> {
             bgcolor: Colors.amber,
             size: 35,
             child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(35 / 5)),
+                borderRadius: const BorderRadius.all(Radius.circular(35 / 5)),
                 child: Image.asset(
                   'images/question.png',
                   fit: BoxFit.cover,

@@ -33,6 +33,7 @@ dependencies:
   hive_flutter: ^1.1.0
   touch_ripple_effect: ^2.5.2
   logger: ^2.5.0
+  flutter_launcher_icons: ^0.14.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,7 @@ dev_dependencies:
 flutter:
   assets:
     - images/
+    - assets/
 
   uses-material-design: true
 
@@ -66,3 +68,10 @@ flutter:
           weight: 500
         - asset: fonts/IBMPlexMono-Bold.ttf
           weight: 700
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon.png"

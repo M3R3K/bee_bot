@@ -61,7 +61,9 @@ class _Container_NeoState extends State<Container_Neo> {
           onTap: () => widget.onPressed!(),
           rippleColor: Colors.amber,
           child: Container(
-              // padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              constraints: new BoxConstraints(
+                maxHeight: widget.size * 9,
+              ),
               decoration: BoxDecoration(
                 color: widget.bgcolor,
                 borderRadius: BorderRadius.circular(widget.size / 3),

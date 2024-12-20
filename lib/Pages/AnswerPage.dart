@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bee_bot/Pages/UserPage.dart';
 import 'package:bee_bot/models/image_model.dart';
 import 'package:bee_bot/widgets/button_neo.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
@@ -34,13 +33,17 @@ class _AnswerPageState extends State<AnswerPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Answer"),
-        backgroundColor: Colors.amber,
+        elevation: 15,
+        backgroundColor: bgcolor,
       ),
+      backgroundColor: const Color.fromRGBO(10, 94, 178, 1),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
         child: ListView(
           children: [
             ClipRRect(
@@ -53,12 +56,12 @@ class _AnswerPageState extends State<AnswerPage> {
                         color: Colors.black,
                         width: 2,
                       ),
-                      color: Colors.amber,
+                      color: bgcolor,
                     ),
                     child: Image.file(widget.image))),
             const SizedBox(height: 15),
-            const ShadowyContainer(
-                text: "Bee bot answer", width: 250, bgcolor: Colors.amber),
+            ShadowyContainer(
+                text: "Bee bot answer", width: 250, bgcolor: bgcolor),
             const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -83,8 +86,6 @@ class _AnswerPageState extends State<AnswerPage> {
                                   side: const BorderSide(
                                       color: Colors.black, width: 2),
                                   borderRadius: BorderRadius.circular(20)),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -92,7 +93,7 @@ class _AnswerPageState extends State<AnswerPage> {
                                     color: Colors.black,
                                     width: 2,
                                   ),
-                                  color: const Color.fromARGB(255, 239, 67, 82),
+                                  color: bgcolor,
                                 ),
                                 width: 250,
                                 height: 200,
@@ -102,7 +103,8 @@ class _AnswerPageState extends State<AnswerPage> {
                                     const ShadowyContainer(
                                         text: "Are you sure?",
                                         width: 200,
-                                        bgcolor: Colors.amber),
+                                        bgcolor:
+                                            Color.fromRGBO(255, 131, 131, 1)),
                                     const SizedBox(height: 20),
                                     Row(
                                       mainAxisAlignment:

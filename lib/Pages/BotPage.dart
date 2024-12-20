@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:bee_bot/Pages/UserPage.dart';
 import 'package:bee_bot/widgets/button_neo.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
 import 'package:card_loading/card_loading.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:bee_bot/api_key.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -56,6 +53,8 @@ class _BotPageState extends State<BotPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
+
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: ListView(
@@ -70,7 +69,7 @@ class _BotPageState extends State<BotPage> {
                 color: Colors.black,
                 width: 2,
               ),
-              color: Colors.amber,
+              color: bgcolor,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -96,7 +95,7 @@ class _BotPageState extends State<BotPage> {
                   color: Colors.black,
                   width: 2,
                 ),
-                color: Colors.amber,
+                color: bgcolor,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10),

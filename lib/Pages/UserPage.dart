@@ -5,7 +5,6 @@ import 'package:bee_bot/Pages/BotPage.dart';
 import 'package:bee_bot/models/image_model.dart';
 import 'package:bee_bot/widgets/container_neo.dart';
 import 'package:card_loading/card_loading.dart';
-
 import 'package:bee_bot/widgets/shadowy_container.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:touch_ripple_effect/touch_ripple_effect.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -25,6 +23,8 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
+  Color fbgcolor = Color.fromRGBO(46, 80, 119, 1);
   void signUserOut() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -70,7 +70,7 @@ class _UserPageState extends State<UserPage> {
   }
 
   Future<String> fetchUsername() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 150));
     final FirebaseAuth auth = FirebaseAuth.instance;
 
     // Get the current user
@@ -113,19 +113,19 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _key = GlobalKey<ExpandableFabState>();
     final userImages = imageBox.values
         .where((img) => img.userId == user?.uid)
         .toList()
         .reversed
         .toList(); // To display latest first
-    Color backgroundColor = Colors.amber;
 
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: bgcolor,
         shadowColor: Colors.black,
         title: FutureBuilder(
           future: fetchUsername(),
@@ -161,9 +161,13 @@ class _UserPageState extends State<UserPage> {
           ),
         ],
       ),
-      backgroundColor: backgroundColor,
+      backgroundColor: bgcolor,
       body: userImages.isEmpty
-          ? const Center(child: Text('No images added.'))
+          ? Center(
+              child: ShadowyContainer(
+                  text: "No images saved!",
+                  width: 230,
+                  bgcolor: Colors.red[200]!))
           : ListView.builder(
               itemCount: userImages.length,
               itemBuilder: (context, index) {
@@ -177,7 +181,6 @@ class _UserPageState extends State<UserPage> {
                           vertical: 10, horizontal: 15),
                       child: Container_Neo(
                           onPressed: () {
-                            print("Object ID is: ${img.key}");
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -187,7 +190,7 @@ class _UserPageState extends State<UserPage> {
                                           text: img.text,
                                         ))).then((value) => setState(() {}));
                           },
-                          bgcolor: Colors.amber,
+                          bgcolor: bgcolor,
                           size: 35,
                           child: ClipRRect(
                               borderRadius: const BorderRadius.all(
@@ -204,21 +207,52 @@ class _UserPageState extends State<UserPage> {
             ),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
+        key: _key,
+        openButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const Icon(Icons.menu_outlined),
+          fabSize: ExpandableFabSize.regular,
+          foregroundColor: Colors.amber,
+          backgroundColor: fbgcolor,
+        ),
+        closeButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const Icon(Icons.close),
+          fabSize: ExpandableFabSize.regular,
+          foregroundColor: Colors.amber,
+          backgroundColor: fbgcolor,
+        ),
+        overlayStyle: ExpandableFabOverlayStyle(
+          color: Colors.black.withOpacity(0.5),
+          blur: 2,
+        ),
         openCloseStackAlignment: Alignment.center,
         distance: 70,
         type: ExpandableFabType.side,
         children: [
-          FloatingActionButton.small(
+          FloatingActionButton(
+            backgroundColor: fbgcolor,
             heroTag: null,
-            child: const Icon(Icons.camera_enhance_rounded),
+            child: const Icon(Icons.camera_enhance_rounded,
+                color: Colors.amber, size: 30),
             onPressed: () {
+              final state = _key.currentState;
+              if (state != null) {
+                debugPrint('isOpen:${state.isOpen}');
+                state.toggle();
+              }
               _pickImageFrom(ImageSource.camera);
             },
           ),
-          FloatingActionButton.small(
+          FloatingActionButton(
+            backgroundColor: fbgcolor,
             heroTag: null,
-            child: const Icon(Icons.add_photo_alternate),
+            child: const Icon(Icons.add_photo_alternate,
+                color: Colors.amber, size: 30),
             onPressed: () {
+              final state = _key.currentState;
+              if (state != null) {
+                debugPrint('isOpen:${state.isOpen}');
+                state.toggle();
+              }
               _pickImageFrom(ImageSource.gallery);
             },
           ),
