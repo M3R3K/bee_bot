@@ -1,16 +1,8 @@
 # bee_bot
 
-A new Flutter project.
+An AI Study assistant
 
-## Getting Started
+## About this app
 
-This project is a starting point for a Flutter application.
+This app is an AI assistant built to help students with their studies. First iteration is a simple math question solver, it aims to add new and exciting features in later stages.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
