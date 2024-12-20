@@ -8,6 +8,7 @@ import 'package:bee_bot/widgets/input_field.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,24 +26,24 @@ class _HomePageState extends State<HomePage> {
   // input field background color
   Color emailInputColor = Colors.white;
   Color passwordInputColor = Colors.white;
-  Color alertColor = const Color.fromARGB(255, 255, 38, 38)!;
+  Color alertColor = const Color.fromARGB(255, 255, 38, 38);
 
   String message = "";
   bool errorVisible = false;
 
   void signUserIn() async {
     // show a loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: LoadingAnimationWidget.staggeredDotsWave(
-            color: const Color.fromARGB(255, 255, 225, 0),
-            size: 50,
-          ),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return Center(
+    //       child: LoadingAnimationWidget.staggeredDotsWave(
+    //         color: const Color.fromARGB(255, 255, 225, 0),
+    //         size: 50,
+    //       ),
+    //     );
+    //   },
+    // );
 
     try {
       if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
@@ -58,10 +59,8 @@ class _HomePageState extends State<HomePage> {
             passwordInputColor = alertColor;
           });
         }
-        Navigator.pop(context);
         return;
       }
-
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
@@ -91,13 +90,12 @@ class _HomePageState extends State<HomePage> {
         errorVisible = true;
       });
     }
-    if (mounted) {
-      Navigator.pop(context);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     const bgcolor = Color.fromRGBO(167, 166, 255, 0.677);
     const signInColor = Color.fromRGBO(185, 255, 159, 1);
     return Scaffold(
@@ -124,8 +122,8 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 15),
             Visibility(
-              child: SizedBox(height: 30),
               visible: !errorVisible,
+              child: const SizedBox(height: 30),
             ),
             Visibility(
               visible: errorVisible,
@@ -148,7 +146,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ButtonNeo(
-                  bgcolor: Color.fromARGB(255, 93, 218, 31),
+                  bgcolor: const Color.fromARGB(255, 93, 218, 31),
                   text: "Log in",
                   onPressed: () {
                     signUserIn();
@@ -156,14 +154,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(width: 20),
                 ButtonNeo(
-                  bgcolor: Color.fromARGB(255, 93, 218, 31),
+                  bgcolor: const Color.fromARGB(255, 93, 218, 31),
                   text: "Sign Up",
                   onPressed: () {
                     Navigator.push(
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            SignUpPage(),
+                            const SignUpPage(),
                         // transitionDuration: Duration.zero,
                       ),
                     );
@@ -180,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          PasswordForgot(),
+                          const PasswordForgot(),
                       transitionDuration: Duration.zero,
                     ),
                   );

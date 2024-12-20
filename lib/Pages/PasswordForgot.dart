@@ -3,6 +3,7 @@ import 'package:bee_bot/widgets/input_field.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PasswordForgot extends StatefulWidget {
   const PasswordForgot({super.key});
@@ -17,7 +18,7 @@ class _PasswordForgotState extends State<PasswordForgot> {
   Future<void> sendPasswordResetEmail() async {
     if (emailController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please enter an e-mail address'),
           backgroundColor: Colors.red,
           elevation: 10,
@@ -29,7 +30,7 @@ class _PasswordForgotState extends State<PasswordForgot> {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Password reset email sent'),
           backgroundColor: Colors.green,
           elevation: 10,
@@ -37,7 +38,7 @@ class _PasswordForgotState extends State<PasswordForgot> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('E-mail not found'),
           elevation: 10,
           backgroundColor: Colors.red,
@@ -48,6 +49,9 @@ class _PasswordForgotState extends State<PasswordForgot> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
     const bgcolor = Color.fromRGBO(167, 166, 255, 0.677);
     return Scaffold(
       backgroundColor: bgcolor,
@@ -72,10 +76,10 @@ class _PasswordForgotState extends State<PasswordForgot> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ShadowyContainer(
+                const ShadowyContainer(
                     text: "Reset Your Password",
                     width: 250,
-                    bgcolor: const Color.fromARGB(255, 247, 34, 34)),
+                    bgcolor: Color.fromARGB(255, 247, 34, 34)),
                 const SizedBox(height: 40),
                 InputField(
                   hintText: "E-mail address",
@@ -93,7 +97,7 @@ class _PasswordForgotState extends State<PasswordForgot> {
                         onPressed: () {
                           Navigator.pop(context);
                         }),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     ButtonNeo(
                         bgcolor: bgcolor,
                         text: "Continue",

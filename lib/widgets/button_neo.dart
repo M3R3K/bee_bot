@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonNeo extends StatefulWidget {
-  ButtonNeo(
+  const ButtonNeo(
       {super.key,
       required this.bgcolor,
       required this.text,
@@ -31,6 +31,10 @@ class _ButtonNeoState extends State<ButtonNeo> {
           widget.onPressed!();
         }
       },
+      onTapCancel: () => setState(() {
+        _paddingb = widget.size / 5;
+        _paddingr = widget.size / 10;
+      }),
       onTapDown: (_) {
         setState(() {
           _paddingb = 0;

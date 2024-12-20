@@ -25,7 +25,7 @@ class _IncorrectMessageState extends State<IncorrectMessage> {
     return Center(
       child: Text(
         message,
-        style: TextStyle(color: Colors.red),
+        style: const TextStyle(color: Colors.red),
       ),
     );
   }

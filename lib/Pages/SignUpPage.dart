@@ -1,4 +1,3 @@
-import 'package:bee_bot/Pages/UserPage.dart';
 import 'package:bee_bot/widgets/button_neo.dart';
 import 'package:bee_bot/widgets/input_field.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
@@ -6,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -108,6 +108,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
     return Scaffold(
       backgroundColor: Colors.amber[200],
       body: Center(
@@ -130,56 +133,57 @@ class _SignUpPageState extends State<SignUpPage> {
             children: <Widget>[
               const ShadowyContainer(
                   text: "Sign Up!", width: 250, bgcolor: Colors.white),
-              SizedBox(height: 45),
+              const SizedBox(height: 45),
               InputField(
                 hintText: "Name",
                 obscureText: false,
                 controller: _nameController,
                 bgcolor: nameInputColor,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InputField(
                   hintText: "E-mail",
                   obscureText: false,
                   controller: _emailController,
                   bgcolor: emailInputColor),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InputField(
                 hintText: "Password",
                 obscureText: true,
                 controller: _passwordController,
                 bgcolor: passwordInputColor,
               ),
-              SizedBox(height: 15),
-              Visibility(child: SizedBox(height: 30), visible: !errorVisible),
+              const SizedBox(height: 15),
+              Visibility(
+                  visible: !errorVisible, child: const SizedBox(height: 30)),
               Visibility(
                 visible: errorVisible,
                 child: DottedBorder(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   strokeWidth: 2,
+                  borderType: BorderType.RRect,
+                  radius: const Radius.circular(10),
                   child: Text(
                     message,
                     style: TextStyle(color: alertColor, fontFamily: "IBMPlex"),
                   ),
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ButtonNeo(
                     text: "Cancel",
-                    bgcolor: Color.fromRGBO(255, 243, 243, 1),
+                    bgcolor: const Color.fromRGBO(255, 243, 243, 1),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   ButtonNeo(
                     text: "Sign Up!",
-                    bgcolor: Color.fromRGBO(255, 243, 243, 1),
+                    bgcolor: const Color.fromRGBO(255, 243, 243, 1),
                     onPressed: () {
                       _register();
                     },

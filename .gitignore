@@ -31,6 +31,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Hide key from version control.
+api_key.dart
+
 # Symbolication related
 app.*.symbols
 

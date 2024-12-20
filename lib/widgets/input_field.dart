@@ -24,7 +24,7 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(6),
+      padding: const EdgeInsets.all(6),
 
       // color: Colors.white,
       decoration: BoxDecoration(
