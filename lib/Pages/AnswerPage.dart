@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bee_bot/models/image_model.dart';
 import 'package:bee_bot/widgets/button_neo.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
@@ -33,7 +32,7 @@ class _AnswerPageState extends State<AnswerPage> {
 
   @override
   Widget build(BuildContext context) {
-    Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
+    Color bgcolor = const Color.fromRGBO(244, 216, 56, 1);
 
     return Scaffold(
       appBar: AppBar(

@@ -23,8 +23,8 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
-  Color fbgcolor = Color.fromRGBO(46, 80, 119, 1);
+  Color bgcolor = const Color.fromRGBO(244, 216, 56, 1);
+  Color fbgcolor = const Color.fromRGBO(46, 80, 119, 1);
   void signUserOut() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -113,7 +113,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _key = GlobalKey<ExpandableFabState>();
+    final key = GlobalKey<ExpandableFabState>();
     final userImages = imageBox.values
         .where((img) => img.userId == user?.uid)
         .toList()
@@ -207,7 +207,7 @@ class _UserPageState extends State<UserPage> {
             ),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
-        key: _key,
+        key: key,
         openButtonBuilder: RotateFloatingActionButtonBuilder(
           child: const Icon(Icons.menu_outlined),
           fabSize: ExpandableFabSize.regular,
@@ -234,7 +234,7 @@ class _UserPageState extends State<UserPage> {
             child: const Icon(Icons.camera_enhance_rounded,
                 color: Colors.amber, size: 30),
             onPressed: () {
-              final state = _key.currentState;
+              final state = key.currentState;
               if (state != null) {
                 debugPrint('isOpen:${state.isOpen}');
                 state.toggle();
@@ -248,7 +248,7 @@ class _UserPageState extends State<UserPage> {
             child: const Icon(Icons.add_photo_alternate,
                 color: Colors.amber, size: 30),
             onPressed: () {
-              final state = _key.currentState;
+              final state = key.currentState;
               if (state != null) {
                 debugPrint('isOpen:${state.isOpen}');
                 state.toggle();

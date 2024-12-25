@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -50,19 +49,6 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
-    // show a loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: LoadingAnimationWidget.staggeredDotsWave(
-            color: const Color.fromARGB(255, 255, 225, 0),
-            size: 50,
-          ),
-        );
-      },
-    );
-
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -77,7 +63,6 @@ class _SignUpPageState extends State<SignUpPage> {
           'email': user.email,
         });
       }
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         setState(() {
@@ -101,9 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } catch (e) {
       print(e);
     }
-    if (mounted) {
-      Navigator.pop(context);
-    }
+    Navigator.pop(context);
   }
 
   @override
@@ -113,84 +96,92 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
       backgroundColor: Colors.amber[200],
-      body: Center(
-        child: Container(
-          height: 500,
-          width: 320,
-          decoration: BoxDecoration(
-            color: Colors.purple[200], // Light green background
-            border: Border.all(color: Colors.black, width: 2), // Black border
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black, // Shadow color
-                offset: Offset(4, 4), // Shadow offset
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const ShadowyContainer(
-                  text: "Sign Up!", width: 250, bgcolor: Colors.white),
-              const SizedBox(height: 45),
-              InputField(
-                hintText: "Name",
-                obscureText: false,
-                controller: _nameController,
-                bgcolor: nameInputColor,
-              ),
-              const SizedBox(height: 20),
-              InputField(
-                  hintText: "E-mail",
-                  obscureText: false,
-                  controller: _emailController,
-                  bgcolor: emailInputColor),
-              const SizedBox(height: 20),
-              InputField(
-                hintText: "Password",
-                obscureText: true,
-                controller: _passwordController,
-                bgcolor: passwordInputColor,
-              ),
-              const SizedBox(height: 15),
-              Visibility(
-                  visible: !errorVisible, child: const SizedBox(height: 30)),
-              Visibility(
-                visible: errorVisible,
-                child: DottedBorder(
-                  padding: const EdgeInsets.all(6),
-                  strokeWidth: 2,
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
-                  child: Text(
-                    message,
-                    style: TextStyle(color: alertColor, fontFamily: "IBMPlex"),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ButtonNeo(
-                    text: "Cancel",
-                    bgcolor: const Color.fromRGBO(255, 243, 243, 1),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const SizedBox(width: 20),
-                  ButtonNeo(
-                    text: "Sign Up!",
-                    bgcolor: const Color.fromRGBO(255, 243, 243, 1),
-                    onPressed: () {
-                      _register();
-                    },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 80),
+          child: Center(
+            child: Container(
+              height: 500,
+              width: 320,
+              decoration: BoxDecoration(
+                color: Colors.purple[200], // Light green background
+                border:
+                    Border.all(color: Colors.black, width: 2), // Black border
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black, // Shadow color
+                    offset: Offset(4, 4), // Shadow offset
                   ),
                 ],
-              )
-            ],
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const ShadowyContainer(
+                      text: "Sign Up!", width: 250, bgcolor: Colors.white),
+                  const SizedBox(height: 45),
+                  InputField(
+                    hintText: "Name",
+                    obscureText: false,
+                    controller: _nameController,
+                    bgcolor: nameInputColor,
+                  ),
+                  const SizedBox(height: 20),
+                  InputField(
+                      hintText: "E-mail",
+                      obscureText: false,
+                      controller: _emailController,
+                      bgcolor: emailInputColor),
+                  const SizedBox(height: 20),
+                  InputField(
+                    hintText: "Password",
+                    obscureText: true,
+                    controller: _passwordController,
+                    bgcolor: passwordInputColor,
+                  ),
+                  const SizedBox(height: 15),
+                  Visibility(
+                      visible: !errorVisible,
+                      child: const SizedBox(height: 30)),
+                  Visibility(
+                    visible: errorVisible,
+                    child: DottedBorder(
+                      padding: const EdgeInsets.all(6),
+                      strokeWidth: 2,
+                      borderType: BorderType.RRect,
+                      radius: const Radius.circular(10),
+                      child: Text(
+                        message,
+                        style:
+                            TextStyle(color: alertColor, fontFamily: "IBMPlex"),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonNeo(
+                        text: "Cancel",
+                        bgcolor: const Color.fromRGBO(255, 243, 243, 1),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      ButtonNeo(
+                        text: "Sign Up!",
+                        bgcolor: const Color.fromRGBO(255, 243, 243, 1),
+                        onPressed: () {
+                          _register();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

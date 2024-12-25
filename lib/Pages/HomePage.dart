@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Image.asset(
                 'assets/icon.png',
                 width: 150,
@@ -156,7 +156,15 @@ class _HomePageState extends State<HomePage> {
                                   const SignUpPage(),
                           // transitionDuration: Duration.zero,
                         ),
-                      );
+                      ).then((value) {
+                        setState(() {
+                          _emailController.clear();
+                          _passwordController.clear();
+                          emailInputColor = Colors.white;
+                          passwordInputColor = Colors.white;
+                          errorVisible = false;
+                        });
+                      });
                     },
                   ),
                 ],

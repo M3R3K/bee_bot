@@ -39,7 +39,7 @@ class _BotPageState extends State<BotPage> {
     final imageByte = await question.readAsBytes();
 
     final prompt = TextPart(
-        "Can you solve and explain this math problem for me? The image includes multipli choice questions, so please provide the answer and explanation. Ignore every other questio.");
+        "Can you solve and explain this math problem for me? The image includes multipli choice questions, so please provide the answer and explanation with plain text with no markdown tags. Ignore every other question.");
 
     final imagePart = DataPart('image/jpeg', imageByte);
 
@@ -53,7 +53,7 @@ class _BotPageState extends State<BotPage> {
 
   @override
   Widget build(BuildContext context) {
-    Color bgcolor = Color.fromRGBO(244, 216, 56, 1);
+    Color bgcolor = const Color.fromRGBO(244, 216, 56, 1);
 
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
