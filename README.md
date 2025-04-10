@@ -1,4 +1,6 @@
 <p align="center"><img src='app_logo.png'></p>
+
+
 # bee_bot
 
 An AI Study assistant
