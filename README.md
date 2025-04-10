@@ -1,4 +1,4 @@
-[!AppLogo](app_logo.png)
+![AppLogo](app_logo.png)
 # bee_bot
 
 An AI Study assistant
