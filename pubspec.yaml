@@ -32,6 +32,7 @@ dependencies:
   hive_flutter: ^1.1.0
   touch_ripple_effect: ^2.5.2
   logger: ^2.5.0
+  envied: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +45,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
   hive_generator: ^1.1.0
-  build_runner: ^2.4.0
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

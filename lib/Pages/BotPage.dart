@@ -1,11 +1,10 @@
 import 'dart:io';
-
 import 'package:bee_bot/widgets/button_neo.dart';
 import 'package:bee_bot/widgets/shadowy_container.dart';
 import 'package:card_loading/card_loading.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bee_bot/api_key.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:hive/hive.dart';
 import '../models/image_model.dart';
@@ -34,12 +33,13 @@ class _BotPageState extends State<BotPage> {
   }
 
   Future<String?> getResponse(File question) async {
-    final model =
-        GenerativeModel(model: 'gemini-1.5-flash', apiKey: GEMINI_API_KEY);
+    const String API_KEY = String.fromEnvironment('API_KEY');
+    print(API_KEY);
+    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: API_KEY);
     final imageByte = await question.readAsBytes();
 
     final prompt = TextPart(
-        "Can you solve and explain this math problem for me? The image includes multipli choice questions, so please provide the answer and explanation with plain text with no markdown tags. Ignore every other question.");
+        "Can you solve and explain this math problem for me? The image includes multiple choice questions, so please provide the answer and explanation with plain text with no markdown tags. Ignore every other question.");
 
     final imagePart = DataPart('image/jpeg', imageByte);
 
